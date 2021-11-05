@@ -3,7 +3,6 @@ module.exports = {
     browser: true,
     es6: true,
     commonjs: true,
-    es6: true,
     node: true,
   },
   parser: '@typescript-eslint/parser', // Specifies the ESLint parser
@@ -26,8 +25,9 @@ module.exports = {
       version: '17',
     },
   },
-  plugins: ['react'],
+  plugins: ['react', 'prettier'],
   rules: {
+    'prettier/prettier': 'error',
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.tsx'] }],
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
@@ -37,5 +37,7 @@ module.exports = {
     'arrow-parens': [0, { requireForBlockBody: false }],
     'jsx-quotes': 'off',
     'react/jsx-one-expression-per-line': 'off',
+    'object-curly-newline': 'off',
+    'max-len': 'off',
   },
 };

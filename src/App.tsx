@@ -1,11 +1,16 @@
 import React from 'react';
+import { ApolloProvider } from '@apollo/client';
+import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import Wrapper from './components/Wrapper';
-import NowWhat from './components/NowWhat';
+// import NowWhat from './components/NowWhat';
+import client from './client';
+import { Chart } from './Features/Chart';
+import createStore from './store';
 
 const theme = createTheme({
   palette: {
@@ -21,15 +26,21 @@ const theme = createTheme({
   },
 });
 
+const store = createStore();
+
 const App = () => (
-  <MuiThemeProvider theme={theme}>
-    <CssBaseline />
-    <Wrapper>
-      <Header />
-      <NowWhat />
-      <ToastContainer />
-    </Wrapper>
-  </MuiThemeProvider>
+  <ApolloProvider client={client}>
+    <Provider store={store}>
+      <MuiThemeProvider theme={theme}>
+        <CssBaseline />
+        <Wrapper>
+          <Header />
+          <Chart />
+          <ToastContainer />
+        </Wrapper>
+      </MuiThemeProvider>
+    </Provider>
+  </ApolloProvider>
 );
 
 export default App;
