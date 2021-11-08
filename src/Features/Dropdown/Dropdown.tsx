@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { gql, useQuery } from '@apollo/client';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField } from '@material-ui/core';
