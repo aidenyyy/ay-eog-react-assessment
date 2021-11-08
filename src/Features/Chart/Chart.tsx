@@ -20,7 +20,7 @@ const Chart = () => {
   if (selectedMetrics.length === 0) return <></>;
 
   return (
-    <ResponsiveContainer width="100%" height={500}>
+    <ResponsiveContainer width="90%" height={500}>
       <LineChart data={chartData.slice(0, chartData.length - 1)}>
         <XAxis dataKey="at" />
         <YAxis unit="F" yAxisId={0} hide={!hasTempMetric} />
