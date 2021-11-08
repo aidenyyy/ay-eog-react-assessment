@@ -1,34 +1,18 @@
-import { useSubscription } from '@apollo/client';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { LinearProgress } from '@material-ui/core';
+import React from 'react';
 import { LineChart, XAxis, YAxis, Legend, Tooltip, CartesianGrid, Line } from 'recharts';
-import { LinearProgress, Typography } from '@material-ui/core';
-import { MeasurementDataResponse } from './type';
-import { subscriptionQuery } from './query';
-import { IState } from '../../store';
-import { updateMeasurement } from '../../store/actions';
+import { useCustomQuery, useSubscriptions } from '../hooks';
 
 const Chart = () => {
-  const dispatch = useDispatch();
+  const isDataSet = useCustomQuery();
 
-  const measurementData = useSelector((state: IState) => state.historyData);
+  const chartData = useSubscriptions();
 
-  const { loading, error, data } = useSubscription<MeasurementDataResponse>(subscriptionQuery, {
-    variables: {},
-  });
-
-  useEffect(() => {
-    if (data) {
-      dispatch(updateMeasurement(data));
-    }
-  }, [data]);
-
-  if (loading) return <LinearProgress />;
-  if (error) return <Typography color="error">{error}</Typography>;
+  if (!isDataSet) return <LinearProgress />;
 
   return (
     <div>
-      <LineChart width={900} height={500} data={measurementData.slice(0, measurementData.length - 1)}>
+      <LineChart width={900} height={500} data={chartData.slice(0, chartData.length - 1)}>
         <XAxis dataKey="at" />
         <YAxis unit="F" yAxisId={0} />
         <YAxis unit="%" yAxisId={1} dataKey="injValveOpen" />
@@ -47,4 +31,4 @@ const Chart = () => {
   );
 };
 
-export default () => <Chart />;
+export default Chart;

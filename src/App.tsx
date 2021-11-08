@@ -9,8 +9,8 @@ import Header from './components/Header';
 import Wrapper from './components/Wrapper';
 // import NowWhat from './components/NowWhat';
 import client from './client';
-import { Chart } from './Features/Chart';
 import createStore from './store';
+import Dashboard from './Features/Dashboard';
 
 const theme = createTheme({
   palette: {
@@ -35,7 +35,7 @@ const App = () => (
         <CssBaseline />
         <Wrapper>
           <Header />
-          <Chart />
+          <Dashboard />
           <ToastContainer />
         </Wrapper>
       </MuiThemeProvider>
