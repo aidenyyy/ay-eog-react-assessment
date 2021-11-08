@@ -22,9 +22,10 @@ export default () => {
 
   return (
     <div className={classes.wrapper}>
-      {selectedMetrics.map((metric) => {
+      {selectedMetrics.map((metric, idx) => {
         const currentLatestData = latestData[metric as MetricEnum];
-        return currentLatestData !== undefined && <MetricCard name={metric} value={currentLatestData} />;
+        // eslint-disable-next-line react/no-array-index-key
+        return currentLatestData !== undefined && <MetricCard key={idx} name={metric} value={currentLatestData} />;
       })}
     </div>
   );
